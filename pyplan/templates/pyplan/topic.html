@@ -1,0 +1,20 @@
+{% extends "pyplan/base.html" %}
+
+{% block content %}
+ <p>Topics:{{ topic }}</p>
+
+<p>Entries:</p>
+<p>
+    <a href="{% url 'pyplan:new_entry' topic.id %}">add new entry</a>
+</p>
+<ul>
+    {% for entry in entries %}
+     <li>
+         <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+         <p>{{ entry.text|linebreaks }}</p>
+     </li>
+    {% empty %}
+     <li>There are no entries for this topic yet.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,63 @@
+   {% load static %}
+
+
+      <thead class="thead-sticky">
+      <tr>
+          <th class="date">Число</th>
+          {% for   column_headers in month_column_headers%}
+          <th>{{ forloop.counter }}<br/> {{column_headers.1| date:"H:i"}} - {{column_headers.2| date:"H:i"}}   </th>
+          {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody class="main_table_body">
+        {% load multifor%}
+       {% for day in count_day; working in working_trainers; day_off in days_off %}
+      <tr>
+
+          <td  {% if day_off != 0 %} class="holiday" {% else %} class="date-block" {% endif %}>
+           {{day.0 }}
+              <br/>{{day.1}}
+          </td>
+          {% for work_t in working %}
+          <td id="td-selected" name="Main-td-select"  {% if work_t.0.11 != null %} style="background:#{{work_t.0.11.strip}}" data-fill-color="{{work_t.0.11.strip}}" {% endif %} >
+              {%if work_t.0.0 != "none" %}
+              <div class="test-flex" id={{work_t.0.0}} name="{{work_t.0.15}}" >
+                  {% for people_in_day in work_t %}
+                  <div class="people people_block" id={{people_in_day.1}}/{{people_in_day.5}}/{{people_in_day.4}} {% if people_in_day.9 == 1 %} name="instructor" style="background:{{people_in_day.13}}; {% if people_in_day.13 == '#8b00ff' or people_in_day.13 == '#964b00' or people_in_day.13 == '#ffff00' or people_in_day.13 == '#AFEEEE' %} font-weight: bold; {% endif %}{% if people_in_day.13 == '#8b00ff' or people_in_day.13 == '#964b00' %} color: white; {%else%}color:black;{% endif %} "{% endif %} {% if people_in_day.16 != Null%} title="{{people_in_day.16}}" {%endif%} editor="{{people_in_day.19}}" date_edit="{{people_in_day.20| date:'d M Y    H:i'}}">
+                      {{people_in_day.8}} {% if people_in_day.8 != None %}{{people_in_day.6.0}}. {{people_in_day.7.0}}. {% endif %}{% if people_in_day.10 != None %} {{people_in_day.10}} {% endif %}
+                      <span class="icon_ppls" >
+                          {% if people_in_day.14 == 1 %}
+                                {% if people_in_day.13 == '#ffff00' %}
+                                    <img class="i-peters" src="{% static 'logo/peters_black.svg'%}">
+                                {% else %}
+                                    <img class="i-peters" src="{% static 'logo/peters.svg'%}">
+                                {% endif %}
+                          {% endif %}
+                          {% if people_in_day.18 != null %}<font id="Label_PPLS" title="{{people_in_day.18}}">{{people_in_day.18}}</font>{% endif %}
+                      </span>
+                          {% if people_in_day.16 != Null%} <img class="i-peters" src="{% static 'logo/warning.svg'%}" title="{{people_in_day.16}}">  {% endif %}
+
+
+
+                      {% if work_t.0.11 != null and people_in_day.17 == null and people_in_day.9 != 1 and people_in_day.1 != "None" %} <label id="not_accepted">Не назначен!</label> {%endif%}
+                  </div>
+                  {% endfor %}
+               </div>
+               {% if work_t.0.12 != null %} <label name='test' id="color-label" name="{{ work_t.0.12 }}">{{work_t.0.12}}</label> {% endif %}
+
+              {% endif %}
+          </td>
+          {% endfor %}
+     {% endfor %}
+      </tr>
+
+    </tbody>
+
+
+
+
+
+
+
+  

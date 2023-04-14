@@ -1,0 +1,39 @@
+{% load static %}
+<html>
+    <header>
+        <link rel="stylesheet" href = "{% static 'css/login-style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/materialize.css'%}">
+<!--        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
+    </header>
+    <body style="background: white !important;">
+
+          <nav>
+            <div class="nav-wrapper">
+              <a href="#!" class="brand-logo right aero-logo"><img src="{% static 'logo/logo.svg'%}"></a>
+
+            </div>
+          </nav>
+
+        <div class="login">
+
+
+               <form method="post" action="{% url 'users:login' %}" class="login-form">
+                    {% if form.errors%}
+                         Your username and password didn't match. Please try again.
+                    {% endif %}
+                   <h3> Авторизация</h3>
+                    <div class="block">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <button name="submit" class="waves-effect waves-light btn"> Войти </button>
+                    <input type="hidden" name="next" value="{% url 'pyplan:index' %}" />
+
+               </form>
+
+        </div>
+
+    </body>
+</html>

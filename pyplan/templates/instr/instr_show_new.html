@@ -1,0 +1,12 @@
+{% load static%}
+{% for instr in add_pilots %}
+<div id="{{instr.0}}" class="instructor_new is-flex is-justify-content-space-between"> {{instr.1}} {{instr.2}} {{instr.3}}<br> {{instr.4}}
+    <a id="insert_inst"><img src="{% static 'logo/plus.svg'%}" /></a>
+</div>
+{% empty %}
+    <div id="{{instr.0}}" class="instructor_new is-flex is-justify-content-space-between"> Список пуст </div>
+{% endfor %}
+
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/jQuery-ui.js' %}"></script>
+<script src="{% static 'js/Ajax.js' %}"></script>

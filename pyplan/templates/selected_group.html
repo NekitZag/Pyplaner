@@ -1,0 +1,13 @@
+{% load static %}
+
+<select multiple class="browser-default groups-select" name = "Type-group" id="group-color">
+    <option value="0">Сброс</option>
+    <option value="43">Удаление</option>
+    <option value="44">Технический час</option>
+    <option value="1" name="Refresh/Check" id="group_refresh_check" style="">Refresh/Check</option>
+    {% for opt in groups %}
+    <option value="{{opt.0}}" name="{{opt.2}}">{{opt.2}}</option>
+    {% endfor %}
+    <option value="45">Сторонние организации</option>
+</select>
+    <script src="{% static 'js/Select_Group.js'%}"></script>

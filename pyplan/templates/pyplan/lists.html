@@ -1,0 +1,198 @@
+{% load static %}
+
+<form action="" method="GET" id="refresher">
+
+                    <ul class ="tabs teal lighten-1" id="pilots_tabs">
+                        <li class="tab  "><a  href="#pilots" style="color: white">Пилоты</a></li>
+                        <li class="tab "><a  href="#instructors" style="color: white">Инструкторы</a></li>
+                    </ul>
+                <div id="pilots" class="pilots" >
+                    <input id="filter_pilots" type="text" class="search_tab_pilots" placeholder="Поиск">
+                    {% for pilot in pilots %}
+                    <div class="people">
+                        {{pilot.1}} {{pilot.2}} {{pilot.3}}
+                        <br>{{pilot.8}}</br>
+                    </div>
+                    {% empty %}
+                    <div class="people"> No people</div>
+                    {% endfor %}
+                </div>
+
+                <div id="instructors" class="instructors" >
+                    <input id="filter_instructors" type="text" class="search_tab_pilots" placeholder="Поиск">
+                    {% for instructor in instructors %}
+                    <div class="people">
+                        {{instructor.1}} {{instructor.2}} {{instructor.3}}
+                        <br>{{instructor.4}}</br>
+
+                    </div>
+                    {% empty %}
+                    <div class="people"> No people</div>
+                    {% endfor %}
+                </div>
+
+
+            </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/SelectURL.js' %}"></script>
+    <script src="{% static 'js/materialize.js' %}"></script>
+
+<script>
+
+     //Отслеживание отпуска клавиши для вводимого текста-фильтра в элемент <input> для вкладки пилоты
+      $("#filter_pilots").keyup(function() {
+
+            // Retrieve the input field text and reset the count to zero
+            var filter = $(this).val(),
+
+              count = 0;
+            // Loop through the comment list
+            $('#pilots div').each(function() {
+              // If the list item does not contain the text phrase fade it out
+              if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).hide();  // MY CHANGE
+
+                // Show the list item if the phrase matches and increase the count by 1
+              } else {
+                $(this).show(); // MY CHANGE
+                count++;
+              }
+
+           });
+       });
+
+      // Отслеживание отпуска клавиши для вводимого текста-фильтра в элемент <input> для вкладки инструкторы
+      $("#filter_instructors").keyup(function() {
+
+            // Retrieve the input field text and reset the count to zero
+            var filter = $(this).val(),
+
+              count = 0;
+            // Loop through the comment list
+            $('#instructors div').each(function() {
+              // If the list item does not contain the text phrase fade it out
+              if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).hide();  // MY CHANGE
+
+                // Show the list item if the phrase matches and increase the count by 1
+              } else {
+                $(this).show(); // MY CHANGE
+                count++;
+              }
+
+           });
+       });
+
+      //Инициализация родительских классов элементов пилотов и инструкторов
+      InstructorsListElement = document.querySelector('.instructors');
+      PilotsListElement = document.querySelector('.pilots');
+
+      //Инициализация списка всех элементов пилотов и инструкторов
+      const instructorElements = InstructorsListElement.querySelectorAll('.people');
+      const pilotsElements= PilotsListElement.querySelectorAll('.people');
+
+      // Перебираем все элементы списка и открываем им свойства перемещения
+      for (const inst of instructorElements) {
+        inst.draggable = true;
+      }
+
+      for (const pilo of pilotsElements) {
+        pilo.draggable = true;
+      }
+
+      //Начало действия перемещения инструкторов
+      InstructorsListElement.addEventListener(`dragstart`, (evt) => {
+        evt.target.classList.add(`selected`);
+      });
+
+      //Начало действия перемещения пилотов
+      PilotsListElement.addEventListener(`dragstart`, (evt) => {
+          evt.target.classList.add(`selected`);
+      });
+
+      //Конец действия перемещения инструкторов
+      InstructorsListElement.addEventListener(`dragend`, (evt) => {
+          const activeElement = InstructorsListElement.querySelector(`.selected`);
+          const currentElement = document.elementFromPoint(event.clientX, event.clientY);
+          evt.target.classList.remove(`selected`);
+          console.log(currentElement.parentNode.classList);
+          if (!currentElement.parentNode.classList.contains(`test-flex`)) {return;}
+          //currentElement.parentNode.replaceChild(activeElement,currentElement);
+          currentElement.className=activeElement.className;
+          currentElement.innerHTML =activeElement.innerHTML;
+          currentElement.draggable = true;
+      });
+
+      //Конец действия перемещения пилотов
+      PilotsListElement.addEventListener(`dragend`, (evt) => {
+          const activeElement = PilotsListElement.querySelector(`.selected`);
+          const currentElement = document.elementFromPoint(event.clientX, event.clientY);
+          evt.target.classList.remove(`selected`);
+          console.log(currentElement.parentNode.classList);
+          if (!currentElement.parentNode.classList.contains(`test-flex`)) {return;}
+          //currentElement.parentNode.replaceChild(activeElement,currentElement);
+          currentElement.className=activeElement.className;
+          currentElement.innerHTML =activeElement.innerHTML;
+          currentElement.draggable = true;
+      });
+
+      //Инициализация родительских классов элементов активной таблицы
+      PeopleTableListElement = document.getElementById('followers');
+
+      //Инициализация списка всех элементов
+      const peopleElements= PeopleTableListElement.querySelectorAll('.test-flex');
+
+
+      //Начало действия перемещения людей в таблице
+      peopleElements.forEach(p => p.addEventListener(`dragstart`, (evt) => {
+          evt.target.classList.add(`selected`);
+      }));
+
+      //Конец действия перемещения людей в таблице
+      peopleElements.forEach(p => p.addEventListener(`dragend`, (evt) => {
+          evt.target.classList.remove(`selected`);
+          for (const inst of p.children) {
+              inst.classList.remove(`selected`);
+      }
+      }));
+
+      //Замена людей
+      peopleElements.forEach(p => p.addEventListener(`dragover`, (evt) => {
+          // Разрешаем сбрасывать элементы в эту область
+          evt.preventDefault();
+
+          // Находим перемещаемый элемент
+          const activeElement = p.querySelector(`.selected`);
+          // Находим элемент, над которым в данный момент находится курсор
+          const currentElement = document.elementFromPoint(event.clientX, event.clientY);
+          // Проверяем, что событие сработало:
+          // 1. не на том элементе, который мы перемещаем,
+          // 2. именно на элементе списка
+          const isMoveable = activeElement !== currentElement &&
+          currentElement.classList.contains(`people`) && !currentElement.classList.contains(`selected`);
+
+          // Если нет, прерываем выполнение функции
+          if (!isMoveable) {
+          return;
+        }
+
+        // Находим элемент, перед которым будем вставлять
+          const nextElement = (currentElement === activeElement.nextElementSibling) ?
+            currentElement.nextElementSibling :
+            currentElement;
+
+         // Вставляем activeElement перед nextElement
+          //p.insertBefore(activeElement, nextElement);
+          const tmp=activeElement.innerHTML;
+          activeElement.innerHTML=currentElement.innerHTML;
+          currentElement.innerHTML=tmp;
+          activeElement.classList.remove(`selected`);
+          currentElement.classList.add(`selected`);
+      }));
+
+   </script>

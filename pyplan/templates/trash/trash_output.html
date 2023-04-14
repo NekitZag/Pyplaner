@@ -1,0 +1,16 @@
+{% load static%}
+
+<div id ="instr_in_list">
+    {% for people in list %}
+    <div id="{{people.1}}" class="instructor is-justify-content-space-between"> {{people.2}} {{people.3}} {{people.4}}
+        <br> {{people.11.date}} - {{people.12.date}}
+    </div>
+    {% empty %}
+        <div id="{{people.1}}" class="instructor  is-justify-content-space-between"> Список пуст </div>
+    {% endfor %}
+</div>
+
+
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/jQuery-ui.js' %}"></script>
+<script src="{% static 'js/Ajax.js' %}"></script>

@@ -1,0 +1,7 @@
+{% load static%}
+{% for id in userId %}
+<div class=" is-flex is-justify-content-space-between"> UserId пользователя:  <b style="margin-left: 15px; font-size: 25px;">{{id}}</b>
+</div>
+{% empty %}
+    <div  class=" is-flex is-justify-content-space-between">  Не найден </div>
+{% endfor %}

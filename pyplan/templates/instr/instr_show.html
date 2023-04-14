@@ -1,0 +1,17 @@
+{% load static%}
+
+<div id ="instr_in_list">
+    {% for inst in instr_uses %}
+    <div id="{{inst.1}}" class="instructor is-flex is-justify-content-space-between"> {{inst.4}} {{inst.5}} {{inst.6}}<br> {{inst.7}}
+        <a id="delete_inst"><img src="{% static 'logo/trash.svg'%}" /></a>
+    </div>
+    {% empty %}
+        <div id="{{inst.1}}" class="instructor is-flex is-justify-content-space-between"> Список пуст </div>
+    {% endfor %}
+</div>
+
+
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/jQuery-ui.js' %}"></script>
+<script src="{% static 'js/Ajax.js' %}"></script>
+

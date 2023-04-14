@@ -1,0 +1,12 @@
+{% load static %}
+
+    {% if user.is_authenticated %}
+         {{user.username}}
+    {% else %}
+     <a href="{% url 'users:login' %}">log in</a>
+    {% endif %}
+</p>
+
+{% block content %}
+
+{% endblock content %}

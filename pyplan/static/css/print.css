@@ -1,0 +1,147 @@
+@media print{
+
+body{
+background-color: white !important;
+}
+
+/*.nav{
+visibility: hidden;
+display: none;
+}*/
+
+/*.nav-wrapper{
+visibility: hidden;
+display: none;
+}*/
+.tab.col.xs1{
+    display:none;
+}
+.sticky{
+visibility: hidden;
+display: none;
+}
+.row .col.m3{
+    width: 25% !important;
+}
+.layout{
+display: none;
+visibility: hidden;
+}
+
+/*.print{
+width:auto;
+visibility: visible;
+}*/
+
+/*.nav-wrapper{
+display: none;
+visibility: hidden;
+}*/
+.people{
+    flex-direction: row;
+
+}
+.people > label{
+display:none;
+}
+.col.s12.tabs-sticky{
+    display: block;
+    content:'5000';
+}
+
+th{
+    font-size: 7px;
+}
+#myPlot{
+display: none !important;
+}
+
+
+.table{
+    width: auto !important;
+}
+#color-label{
+font-size: 8px
+}
+.holiday{
+    font-size: 8px;
+}
+.tabs-sticky{
+position: relative;
+top:0px;
+    font-size: 8px;
+    width:10px;
+}
+
+.tabs.teal.lighten-1{
+    height: 30px !important;
+}
+
+.tabs{
+    height: 30px !important;
+    display:none;
+}
+
+#print_seven>.white-text{
+    display: none;
+}
+#print_five>.white-text{
+    display: none
+}
+#print_seven>.white-text.active{
+   display: block;
+}
+#print_five>.white-text.active{
+    display:block;
+
+   margin-top: -11px;
+}
+
+.people_block .i-peters{
+    width: 15px !important;
+}
+
+.i-peters{
+    text-align: center !important;
+    float: none !important;
+    margin-right: 0 !important;
+}
+*{
+margin:0 !important;
+padding: 0 !important;
+}
+.table_excel{
+margin: 0 !important;
+}
+
+.test-flex>div{
+    font-size: 10px;
+
+}
+
+#Label_PPLS{
+    display:none;
+}
+.test-flex{
+    grid-template-rows: auto auto !important;
+    grid-template-columns: auto auto !important;
+    gap: 1px !important;
+    text-align: center !important;
+}
+.holiday{
+    font-size: 10px !important;
+}
+.date-block{
+    font-size: 10px !important;
+}
+th{
+    font-size: 10px !important;
+    display: inline-block:
+    }
+#Icons{
+    display: none;
+}
+.thead-sticky{
+	top:0px;
+}
+}

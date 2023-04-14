@@ -1,0 +1,82 @@
+{% load static%}
+<html>
+    <header>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"  type="text/css"  href="{% static 'css/bulma.min.css'%}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/instr_edit.css' %}">
+    </header>
+    <body id="add_people_page">
+
+            <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="{% static 'logo/logo.svg'%}" width="112" height="28"/>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        </nav>
+            <h1 class="has-text-centered title">Изменение групп инструкторов</h1>
+      <div class="container has-text-centered">
+
+          <div class="select">
+              <select id="flight">
+                  <option value="Null">Выберите тип самолета</option>
+                  <option value="320">320</option>
+                  <option value="330">330</option>
+                  <option value="350">350</option>
+                  <option value="737">737</option>
+                  <option value="777">777</option>
+              </select>
+          </div>
+
+          <div class="select">
+              <select id="group">
+                  <option value="Null">Выберите группу</option>
+                  <option value="1">Основная</option>
+                  <option value="2">Штатники</option>
+                  <option value="3">Внештатники-экзаменаторы</option>
+                  <option value="4">Внештатники с тр. доп.</option>
+                  <option value="5">SFI наземники</option>
+                  <option value="6">КРС и ЛИС</option>
+                  <option value="7">СРМ</option>
+                  <option value="8">УЛО</option>
+              </select>
+          </div>
+
+          <div class="button is-info" id="show_instr">
+              Показать
+          </div>
+
+        <div class="section is-flex is-justify-content-space-between">
+            <div class="box" style="width:360px; height:auto;">
+                <div id ="instr_in_list">
+                    <div class="is-flex is-justify-content-space-between"> Список пуст </div>
+                </div>
+              </div>
+
+            <div class="box" style="width:360px; height:200px;">
+                <div class="search is-flex">
+                    <input id="id_sap" class="input is-info" type="text" placeholder="Введите Sap" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">
+                    <a id="search_sap"><img class="image is-24x24" src="{% static 'logo/lupa.svg'%}"/></a>
+                </div>
+                <div id="adding_people">
+                </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    <footer>
+        <script src="{% static 'js/jQuery.js' %}"></script>
+        <script src="{% static 'js/jQuery-ui.js' %}"></script>
+        <script src="{% static 'js/Ajax.js' %}"></script>
+        <script src="{% static 'js/instr_edit.js' %}"></script>
+
+
+    </footer>
+</html>
+

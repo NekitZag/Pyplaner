@@ -1,0 +1,16 @@
+.instructor{
+    padding:5px;
+    border: solid black 1px;
+    border-radius: 15px;
+}
+.instructor_new{
+    padding:5px;
+    border: solid black 1px;
+    border-radius: 15px;
+}
+
+#instr_in_list{
+    overflow-y:scroll;
+    overflow: auto;
+    height:500px;
+}

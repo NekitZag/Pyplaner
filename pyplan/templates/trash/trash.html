@@ -1,0 +1,67 @@
+{% load static%}
+<html>
+    <header>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"  type="text/css"  href="{% static 'css/bulma.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/instr_edit.css' %}">
+        <link rel="stylesheet" href="{% static 'css/loading.css' %}">
+    </header>
+    <body id="add_people_page">
+
+            <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="{% static 'logo/logo.svg'%}" width="112" height="28"/>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        </nav>
+            <h1 class="has-text-centered title">Полный список пилотов</h1>
+      <div class="container has-text-centered">
+
+          <div class="select">
+              <select id="flight">
+                  <option value="Null">Выберите тип самолета</option>
+                  <option value="320">320</option>
+                  <option value="330">330</option>
+                  <option value="350">350</option>
+                  <option value="737">737</option>
+                  <option value="777">777</option>
+              </select>
+          </div>
+
+          <div class="button is-info" id="show_pilots" title="Запрос мега не оптимизирован и работает с ОГРОМНЫМ количеством данных,
+                  время его загрузки - неизвестно.">
+              Показать*
+          </div>
+
+        <div class="section is-justify-content-space-between">
+            <div class="box" style="width:100%; height:auto;">
+                <div id ="pilots_list">
+                    <div class="loading" style="margin-left:50%; "></div>
+                    <div class="is-flex is-justify-content-space-between"> Список пуст </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </body>
+    <footer>
+        <div class="content has-text-centered">
+            <p class="is-underlined" style="opacity: 0.05">
+                  Ничто не может сравниться с агонией неведения,
+                  которой никогда не наступит конец.
+            </p>
+        </div>
+        <script src="{% static 'js/jQuery.js' %}"></script>
+        <script src="{% static 'js/jQuery-ui.js' %}"></script>
+        <script src="{% static 'js/Ajax.js' %}"></script>
+        <script src="{% static 'js/trash/trash.js' %}"></script>
+
+
+    </footer>
+</html>
+

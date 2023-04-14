@@ -1,0 +1,25 @@
+.login{
+     display: flex;
+    justify-content: center;
+    text-align: center;
+    borer
+}
+.block {
+    width: 300px;
+}
+.login-form{
+    font-color: white;
+    border: solid black 1px;
+    margin: 250px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 30px;
+    background-color: linear-gradient(0deg, #02458dff, #4a90e2ff, #f37b09ff, #8d0801ff, #bcf8ecff);
+}
+.login-form > button{
+    top: 10px;
+}
+
+.block > input {
+text-align: center;
+}

@@ -1,0 +1,221 @@
+
+ {% load static %}
+<html>
+    <header>
+<!--        -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/materialize.css'%}">
+        <link rel="stylesheet" href="{% static 'css/print.css'%}">
+<!--        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+<!--        <link rel="styleshhet" href="{% static 'css/material-icons.css'%}">-->
+        <link rel="stylesheet" href="{% static 'css/context.css' %}">
+<!--        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">-->
+        <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+
+    </header>
+    <title>PyPlanner</title>
+
+
+
+    <body>
+
+  <nav class="sticky">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo right aero-logo"><img src="{% static 'logo/logo.svg'%}"></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="centered hide-on-med-and-down navbar">
+            <li><a title="Распечатать" href="#" onclick="window.print()"><img src="{% static 'logo/print.svg'%}"></i></a></li>
+            <li><a id="redirect_people_adding" title="Изменение списка ЛС"  ><img src="{% static 'logo/users.svg'%}"></i></a></li>
+            <li><a id="blind" title="Цветовая слепота"><img src="{% static 'logo/glasses.svg'%}"></i></a></li>
+<!--            <li><a title="Вывод в DOCX" id="docx_but" ><img src="{% static 'logo/word.svg'%}"></i></a></li>-->
+
+          <form id="select-navbar" class="nav-select">
+          <li>
+               <input name="date_send" type="month" min="2020-08" placeholder="Год и месяц">
+          </li>
+              <li id="select_DB">
+                  <select id="select_data_base_of_project" class="browser-default select-at">
+                        <option value=1>Основная база данных</option>
+                        <option value=0>Тестовая база данных</option>
+                  </select>
+              </li>
+              <li> <label id="info_data_base"> </label></li>
+
+          </form>
+
+      </ul>
+
+    </div>
+  </nav>
+
+    <div class="layout sticky-layout">
+            <div id="user_of_project" class="logout-span" editor="{{user.first_name}}">
+                {% if user.is_authenticated %}
+                     {{user.username}}
+                    <a href="{% url 'users:logout' %}">Выйти</a>
+                {% else %}
+                 <a href="{% url 'users:login' %}">Войти</a>
+                {% endif %}
+            </div>
+        <div class="button-option" id="loaded_group">
+            <select multiple class="browser-default groups-select" name = "Type-group" id="group-color">
+                {% for opt in groups %}
+                <option value="{{opt.0}}">{{opt.2}}</option>
+                    {% endfor %}
+
+                </select>
+
+            <!--<a class="waves-effect waves-light btn modal-trigger btn" href="#createGroup">Создать</a>
+            <a class="waves-effect waves-light btn modal-trigger btn" href="#deleteGroup" >Удалить</a>-->
+        </div>
+
+
+        <div class="sidebar">
+
+            <form method="POST" class="form_pilots_change">
+                <select name="Type-AT" class="browser-default select-at" id="type_at">
+                    <option value="320" number_menu="1">Тип ВС: 320</option>
+                    <option value="330" number_menu="2">330</option>
+                    <option value="350" number_menu="3">350</option>
+                    <option value="737" number_menu="4">737</option>
+                    <option value="777" number_menu="5">777</option>
+                    <option value="737" PP="ПП перед ТРЖ" number_menu="6">ПП для 737</option>
+                    <option value="777" PP="ПП перед ТРЖ" number_menu="7">ПП для 777</option>
+                </select>
+
+
+
+            </form>
+            <ul class ="tabs  tb_pep" id="pilots_tabs" >
+                         <li class="tab  "><a  href="#pilots" style="color: white" name="Скрыть поставленных пилотов">Пилоты</a></li>
+                        <li class="tab "><a  href="#instructors" style="color: white" name="Скрыть поставленных инструкторов">Инструкторы</a></li>
+                    </ul>
+            <div action="" method="GET" id="refresher">
+
+                <div id="loader" style="display:none;"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+            <div class="row main-table-block" id="main_display_table">
+
+                <div class="col s12 tabs-sticky"    >
+                    <ul class="tabs" id="tabs">
+
+                        <li id="print_seven" class="tab col m3 s12"><a class="white-text " href="#followers">7000</a></li>
+                        <li id="print_five" class="tab col m3 s12"><a class="white-text" href="#posts">5000</a></li>
+
+                        <li class="tab col xs1"><label class="checkbox_color_EDIT" id="trash"><input type="checkbox" id="checkbox_hide_extra_sessions" /><span style="color: black">Основные тренажеры</span></label> </li>
+
+                    </ul>
+                </div>
+                <div id="posts" class="col s12 ">
+                    <table class=" centered " id="Table_5000_simulator">
+                      <thead>
+                      <tr>
+                          <th class="date">Число</th>
+                          <th>Тренажер 1<br/>01:15 - 05:15 <br> <input name="select_start" style="width:40px;"  type="time" value="00:05:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="01:00:00"/> </th>
+                          <th>Тренажер 2<br/>08:00 - 12:00 <br> <input name="select_start" style="width:40px;"  type="time" value="04:10:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                          <th>Тренажер 3<br/>12:05 - 16:05 <br>  <input name="select_start" style="width:40px;"  type="time" value="08:15:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                          <th>Тренажер 4<br/>17:05 - 21:05 <br>  <input name="select_start" style="width:40px;"  type="time" value="13:15:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/></th>
+                          <th>Тренажер 5<br/>21:10 - 01:10 <br>  <input name="select_start" style="width:40px;"  type="time" value="17:20:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% load multifor%}
+                       {% for day in count_day; working in working_trainers %}
+                      <tr>
+
+                          <td  {% if day.2 != 0 %} class="holiday" {% else %} class="date-block" {% endif %}>
+                           {{day.0 }}
+                              <br/>{{day.1}}
+                          </td>
+                           {% for work_t in working %}
+                          <td>
+                              <div class="test-flex" id={{work_t.0.0}}>
+                                  {% for people_in_day in work_t %}
+                                      <div class="people" id={{people_in_day.1}} {% if people_in_day.5 == 1 %} style="color:black; background:yellow;"{% endif %}>{{people_in_day.4}}</div>
+                                  {% endfor %}
+                               </div>
+                          </td>
+                          {% endfor %}
+                     {% endfor %}
+                      </tr>
+
+                    </tbody>
+                    </table>
+                </div>
+                <div id="followers" class="col s12">
+                    <table class=" centered tableWrap" id="Table_7000_simulator">
+                      <thead>
+                      <tr>
+                          <th class="date">Число</th>
+                          <th>Тренажер 1<br/>01:15 - 05:15 <br> <input name="select_start" style="width:40px;"  type="time" value="00:05:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="01:00:00"/> </th>
+                          <th>Тренажер 2<br/>08:00 - 12:00 <br> <input name="select_start" style="width:40px;"  type="time" value="04:10:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                          <th>Тренажер 3<br/>12:05 - 16:05 <br>  <input name="select_start" style="width:40px;"  type="time" value="08:15:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                          <th>Тренажер 4<br/>17:05 - 21:05 <br>  <input name="select_start" style="width:40px;"  type="time" value="13:15:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/></th>
+                          <th>Тренажер 5<br/>21:10 - 01:10 <br>  <input name="select_start" style="width:40px;"  type="time" value="17:20:00"/>
+                                                                    - <input name="select_end" style="width:40px;"  type="time" value="08:00:00"/> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% load multifor%}
+                       {% for day in count_day; working in working_trainers %}
+                      <tr>
+
+                          <td  {% if day.2 != 0 %} class="holiday" {% else %} class="date-block" {% endif %}>
+                           {{day.0 }}
+                              <br/>{{day.1}}
+                          </td>
+                           {% for work_t in working %}
+                          <td>
+                              <div class="test-flex" id={{work_t.0.0}}>
+                                  {% for people_in_day in work_t %}
+                                      <div class="people" id={{people_in_day.1}} {% if people_in_day.5 == 1 %} style="color:black; background:yellow;"{% endif %}>{{people_in_day.4}}</div>
+                                  {% endfor %}
+                               </div>
+                          </td>
+                          {% endfor %}
+                     {% endfor %}
+                      </tr>
+
+                    </tbody>
+                    </table>
+                </div>
+                <div>
+              <table id="myPlot" >
+
+              </table>
+</div>
+
+            </div>
+
+
+
+    </body>
+    <script src="{% static 'js/jQuery.js' %}"></script>
+    <script src="{% static 'js/jQuery-ui.js' %}"></script>
+    <script src="{% static 'js/SelectURL.js' %}"></script>
+    <script src="{% static 'js/popper.min.js.map' %}"></script>
+    <script src="{% static 'js/Ajax.js' %}"></script>
+    <script src="{% static 'js/materialize.js' %}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/blind_system.js'%}"></script>
+    <script src="{% static 'js/Search_people.js'%}"></script>
+    <script src="{% static 'js/Handler_of_table.js'%}"></script>
+</html>
+
+
+

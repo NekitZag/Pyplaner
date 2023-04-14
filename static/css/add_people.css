@@ -1,0 +1,108 @@
+* {
+    margin:0;
+    padding: 0;
+}
+#add_people_page{
+    background-color: white !important;
+}
+.add_people_container{
+    position:absolute;
+    left: 15%;
+    right:15%;
+    top:70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.block_delete_people{
+    text-align: center;
+    height: 550px;
+    width: 400px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.block_delete_people > p{
+    border-bottom: 3px solid red;
+}
+
+.block_all_pilots{
+    text-align: center;
+    height: 550px;
+    width: 400px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px ;
+}
+.block_all_pilots > p {
+    border-bottom: 3px solid black;
+}
+.delete-from-list > i{
+    color: black !important;
+    padding-right: 10px;
+}
+.search_add{
+    background-color:#ffffff !important;
+    border-radius: 50px !important;
+    color: black !important;
+    text-align: center;
+    width: 80% !important;
+    border: 1px solid black !important;
+    margin-top:5px !important;
+}
+.search_add_pilot{
+    color: black !important;
+    font-size:60px;
+}
+.search_tab{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.people-list > li{
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    justify-items: end;
+    padding: 4px;
+}
+.add-to-another-list > i{
+    color: black !important;
+    padding-right: 10px;
+}
+
+/* ICONS*/
+.icon-search{
+    width: 50px;
+    margin: 9px;
+    padding-left: 10px;
+}
+
+.material-icons{
+    margin-top: 7px;
+    margin-right: 10px;
+    width: 30px;
+}
+
+#checkbox-hidden-active-pilots{
+    display: none !important;
+}
+
+#counters > span{
+    display:none !important;
+}
+/*.left_from_page img{
+    width:64px;
+}        не заработало
+*/
+
+/*ICONS END*/

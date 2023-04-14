@@ -1,0 +1,11 @@
+{% load static %}
+
+{% for pilot in add_pilots %}
+<li id={{pilot.1}}/{{pilot.9}}>{{pilot.0}}
+{{pilot.2}} {{pilot.3}} {{pilot.4}}
+    <fount color="Red">{{pilot.9}}<fount>
+    <a class="add-to-another-list"><img class=" material-icons" src="{% static 'logo/plus.svg'%}" /></a> </li>
+{% empty %}
+<li> Список пуст <a href="#" class="add-to-another-list"></a> </li>
+
+{% endfor %}

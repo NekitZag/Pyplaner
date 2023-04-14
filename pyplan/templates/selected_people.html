@@ -1,0 +1,78 @@
+{% load static %}
+<div id="refresher">
+        <div id="checkbox-hidden-active-pilots">
+               <label class="checkbox_color_EDIT"  ><input type="checkbox" id="checkbox_hide_pilots_in_session"/><span id="text-checkbox">Скрыть поставленных пилотов</span></label>
+            </div>
+    <div id="loader" style="display:none;"></div>
+    <div id="pilots" class="pilots" >
+        <div style="display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;">
+        <span> Общее:{{count_pilots}} </span>
+        <span id="count_kvs">  </span>
+        <span id="count_secpil">  </span>
+        <span id="count_instr">  </span>
+        <input id="filter_pilots" type="text" placeholder="Поиск" class="search_tab_pilots">
+        </div>
+        {% for pilot in pilots %}
+        <div class="people" id={{pilot.4}}/{{pilot.9}}/{{pilot.8}}>
+            {{pilot.3}}
+            {{pilot.5}} {{pilot.6}} {{pilot.7}}
+            <span>{{pilot.10}}
+               {%if pilot.14 == 1 %}<br> <font color="Aquamarine"> A330 & A350</font>{%endif%}
+                {% if pilot.12 == 1%}<img class="i-peters" src="{% static 'logo/peters.svg'%}"></span>{%else%}<br>{% endif %}
+               <font color=LightSalmon> {{pilot.1| date:"d M Y"}}{% if pilot.13 != null %} <font color=gold>[{{pilot.13}}]</font>{% endif %} / {{pilot.2| date:"d M Y"}}</font>
+                <div class="grid_container">
+
+                </div>
+                <div class="preliminary">ПП: {{pilot.15|date:"d.M.Y"}}</div>
+
+        </div>
+
+
+
+        {% empty %}
+        <div class="people"> No people</div>
+        {% endfor %}
+    </div>
+
+    <div id="instructors" class="instructors" >
+        <input id="filter_instructors" type="text" placeholder="Поиск" class="search_tab_pilots">
+
+        {% for instructor in instructors%}
+
+        <div name="instructor" class="people" id={{instructor.1}}/{{instructor.3}}/{{instructor.2}}  style="background:{{instructor.8}};{% if instructor.10 == 6 or instructor.10 == 7 %}color:white{% else %}color: black{% endif %};" >
+            {{instructor.0}} {{instructor.4}} {{instructor.5}} {{instructor.6}}
+            <br/>{{instructor.7}}
+
+            <div class="expired_trng" id="test_block">
+                {% for ex in ex_admission %}
+                    {% if instructor.1 == ex.0 %}
+
+                        {% if ex.3 == 4 %}<img title={{ex.4|date:"d.M.Y"}} src="{% static 'logo/warning_inst.svg'%}" />{% endif %}
+                        {% if ex.3 == 7 %}<img title={{ex.4|date:"d.M.Y"}} src="{% static 'logo/warning_trng.svg'%}" />{% endif %}
+                        {% if ex.3 == 5 %}<img title={{ex.4|date:"d.M.Y"}} src="{% static 'logo/warning_ekz.svg'%}" />{% endif %}
+
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="grid_container">
+                </div>
+<!--            <div class="preliminary">ПП: {{instructor.11|date:"d.M.Y"}}</div>-->
+        </div>
+        {% empty %}
+        <div class="people"> Пусто</div>
+        {% endfor %}
+
+
+
+
+    </div>
+
+
+</div>
+
+<!--    <script src="{% static 'js/materialize.js' %}"></script>-->
+    <script src="{% static 'js/script.js'%}"></script>
+<script src="{% static 'js/counter_pilots.js'%}"></script>

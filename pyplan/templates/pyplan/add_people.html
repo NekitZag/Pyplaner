@@ -1,0 +1,98 @@
+{% load static%}
+<html>
+<header>
+<!--        -->
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/materialize.css'%}">
+
+<!--        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+<!--        <link rel="styleshhet" href="{% static 'css/material-icons.css'%}">-->
+        <link rel="stylesheet" href="{% static 'css/add_people.css' %}">
+    </header>
+
+
+
+
+   <body id="add_people_page">
+  <nav class="sticky">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo right aero-logo"><img src="{% static 'logo/logo.svg'%}"></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="centered hide-on-med-and-down">
+            <li><a title="Назад" href="/" ><img style="width: 64px;" src="{% static 'logo/arrow-left.svg' %}" /></a></li>
+          <li><form method="POST" class="form_pilots_change">
+                <select name="Type-AT" class="browser-default select-at" id="type_at">
+                    <option value="320">Тип ВС: 320</option>
+                    <option value="330">330</option>
+                    <option value="350">350</option>
+                    <option value="737">737</option>
+                    <option value="777">777</option>
+                </select>
+       </form></li>
+        <li><form id="select-navbar" class="nav-select">
+                    <input name="date_send_add_people" type="month" min="2020-08" placeholder="Год и месяц" style="    position: relative;
+    bottom: -18px;"/>
+          </form></li>
+      </ul>
+
+    </div>
+  </nav>
+
+   <div class="add_people_container">
+
+       <div class="block_delete_people">
+        <p> Список в приложении</p>
+
+<!--           <div class="search_tab">-->
+<!--        <input id="search_instructors" type="text" placeholder="Введите SAP-номер" class="search_add" onkeyup="this.value = this.value.replace(/[^\d]/g,'');"/>-->
+<!--            <div name="func-search"><a href="#" id='search_delete_pilot' class="search_delete_pilot" ><img class="icon-search" src="{% static 'logo/search.svg'%}" /></a></div>-->
+<!--        </div>-->
+           <ul id="show_people" class="people-list">
+               {% for pilo in pilots %}
+            <li id={{pilo.4}}/{{pilo.9}}/{{pilo.8}}>{{pilo.3}}
+            {{pilo.5}} {{pilo.6}} {{pilo.7}}<a href="#" class="delete-from-list"><img class="material-icons" src="{% static 'logo/trash.svg'%}" /></a> </li>
+            {% empty %}
+            <li> Список пуст <a href="#" class="add-to-another-list"></a> </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+
+    <div class="block_all_pilots" >
+        <p id="main_title">Общий список</p>
+        <div class="search_tab">
+        <input id="search_pilots" type="text" placeholder="Введите SAP-номер" class="search_add" onkeyup="this.value = this.value.replace(/[^\d]/g,'');"/>
+            <div name="func-search"><a href="#" id='search_add_pilot' class="search_add_pilot" ><img class="icon-search" src="{% static 'logo/search.svg'%}" /></a></div>
+        </div>
+            <ul id="adding_people" class="people-list">
+                {% for pilot in add_pilots %}
+                <li id={{pilot.4}}/{{pilot.9}}/{{pilot.8}}>{{pilot.3}}
+                {{pilot.5}} {{pilot.6}} {{pilot.7}}
+                    <a class="add-to-another-list"><img class=" material-icons" src="{% static 'logo/plus.svg'%}" /></a> </li>
+                {% empty %}
+                <li> Список пуст <a href="#" class="add-to-another-list"></a> </li>
+                {% endfor %}
+            </ul>
+    </div>
+   </div>
+    </body>
+    <footer>
+            <script src="{% static 'js/jQuery.js' %}"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+    <script src="{% static 'js/jQuery-ui.js' %}"></script>
+<!--    <script src="{% static 'js/SelectURL.js' %}"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>-->
+    <script src="{% static 'js/popper.min.js.map' %}"></script>
+    <script src="{% static 'js/Ajax.js' %}"></script>
+
+    <script src="{% static 'js/add_people.js'%}"></script>
+
+    </footer>
+
+<!--    <script src="{% static 'js/script.js'%}"></script>-->
+
+
+</html>
+
